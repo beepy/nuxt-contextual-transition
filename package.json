@@ -1,0 +1,47 @@
+{
+  "name": "nuxt-contextual-transition",
+  "version": "0.1.0",
+  "description": "Easy-ish cross-browser transitioning between pages with shared elements and/or sequential order with Nuxt 3.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beepy/nuxt-contextual-transition.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.4.0",
+    "vue-contextual-transition": "^0.1.0"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^0.1.1",
+    "@nuxt/module-builder": "^0.2.1",
+    "@nuxt/schema": "^3.4.0",
+    "@nuxt/test-utils": "^3.4.0",
+    "changelogen": "^0.5.2",
+    "eslint": "^8.38.0",
+    "nuxt": "^3.4.0",
+    "vitest": "^0.30.1"
+  }
+}
