@@ -1,6 +1,6 @@
 # Changelog | Nuxt Contextual Transition 
 
-## [unreleased]
+## [0.1.1] - 2023-05-11 01:55PM
 
 ### Added
 
