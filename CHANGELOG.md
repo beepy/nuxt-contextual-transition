@@ -1,5 +1,9 @@
 # Changelog | Nuxt Contextual Transition 
 
+## v0.1.2
+
+[compare changes](https://github.com/beepy/nuxt-contextual-transition/compare/v0.1.1...v0.1.2)
+
 ## [0.1.1] - 2023-05-11 01:55PM
 
 ### Added
