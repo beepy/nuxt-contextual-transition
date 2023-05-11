@@ -1,10 +1,5 @@
 import { defineNuxtModule, addPlugin, addImports, createResolver } from '@nuxt/kit'
 
-import {
-  RouteLocationNormalized,
-  RouteLocationNormalizedLoaded,
-} from 'vue-router';
-
 // Module options TypeScript interface definition
 export type HashScrollType = false | 'smooth' | 'instant' | 'auto';
 

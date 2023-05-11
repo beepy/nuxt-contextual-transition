@@ -1,13 +1,37 @@
 <template>
-  <div class="modal-content" @click.stop>
-    <NuxtLink to="/modal" class="reset close">&times;</NuxtLink>
-      <FakeImage class="block" :width="320" :height="160" :color="route.params.slug"
-          v-shared-element="{
-            id: route.params.slug, role: 'img'
-        }"
-      />
-    <NuxtLink v-if="previousSlug" :to="`/modal/${previousSlug}`" style="float: left">Previous</NuxtLink>
-    <NuxtLink v-if="nextSlug" :to="`/modal/${nextSlug}`" style="float: right">Next</NuxtLink>
+  <div
+    class="modal-content"
+    @click.stop
+  >
+    <NuxtLink
+      to="/modal"
+      class="reset close"
+    >
+      &times;
+    </NuxtLink>
+    <FakeImage
+      v-shared-element="{
+        id: route.params.slug, role: 'img'
+      }"
+      class="block"
+      :width="320"
+      :height="160"
+      :color="route.params.slug"
+    />
+    <NuxtLink
+      v-if="previousSlug"
+      :to="`/modal/${previousSlug}`"
+      style="float: left"
+    >
+      Previous
+    </NuxtLink>
+    <NuxtLink
+      v-if="nextSlug"
+      :to="`/modal/${nextSlug}`"
+      style="float: right"
+    >
+      Next
+    </NuxtLink>
   </div>
 </template>
 

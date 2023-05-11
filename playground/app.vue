@@ -4,11 +4,17 @@
       Contextual Transition Playground
     </h1>
     <p class="text-center">
-      <NuxtLink to="/">Full Page</NuxtLink>
+      <NuxtLink to="/">
+        Full Page
+      </NuxtLink>
       |
-      <NuxtLink to="/child-page">Child Page</NuxtLink>
+      <NuxtLink to="/child-page">
+        Child Page
+      </NuxtLink>
       |
-      <NuxtLink to="/modal">Modal</NuxtLink>
+      <NuxtLink to="/modal">
+        Modal
+      </NuxtLink>
     </p>
     <div class="content">
       <div class="relative">
@@ -17,12 +23,6 @@
     </div>
   </NuxtLayout>
 </template>
-
-<script setup>
-import { computed } from "vue";
-// import "vue-contextual-transition/dist/style.css";
-
-</script>
 
 <style lang="css">
 

@@ -1,20 +1,24 @@
 <template>
   <div class="playground-index">
     <ul>
-      <li v-for="post in posts">
+      <li
+        v-for="post in posts"
+        :key="post.slug"
+      >
         <NuxtLink :to="`/child-page/${post.slug}`">
           <FakeImage
-            :color="post.color"
             v-shared-element="{
-                id: post.slug, role: 'img'
+              id: post.slug, role: 'img'
             }"
+            :color="post.color"
           />
           <p>
             <span
-              class="inline-block"
               v-shared-element="{
                 id: post.slug, role: 'title'
-            }">{{ post.title }}</span>
+              }"
+              class="inline-block"
+            >{{ post.title }}</span>
           </p>
         </NuxtLink>
       </li>

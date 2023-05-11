@@ -1,6 +1,12 @@
 <template>
   <svg :viewBox="`0 0 ${width} ${height}`">
-    <rect x="0" y="0" :width="width" :height="height" :style="`fill:${hexColor}`"/>
+    <rect
+      x="0"
+      y="0"
+      :width="width"
+      :height="height"
+      :style="`fill:${hexColor}`"
+    />
   </svg>
 </template>
 

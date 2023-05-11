@@ -1,11 +1,10 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app'
-import type { RouterConfig } from '@nuxt/schema';
 import {
   RouteLocationNormalized,
   RouteLocationNormalizedLoaded,
 } from 'vue-router';
 
-import { useContextualTransition, install } from  
+import { install } from  
   'vue-contextual-transition';
 
 // imports a small amount of required css
@@ -34,11 +33,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     ) {
       setCallbacks = false;
     }
-    let result = savedPosition ?? (
+    const result = savedPosition ?? (
       (to.hash && hashScroll !== false) ? { el: to.hash, behavior: hashScroll } : { left: 0, top: 0 }
       );
     if (setCallbacks) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve, _reject) => {
         resolve(result)
       });
     } else {

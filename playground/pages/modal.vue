@@ -1,79 +1,97 @@
 <template>
-<div>
-  <h2><NuxtLink to="/modal">Modal Example</NuxtLink></h2>
-  <p>All child pages will appear here on the parent page</p>
-  <p v-if="route.params.slug">Slug: {{ route.params.slug }}</p>
-  <p v-else><em>No slug</em></p>
-  <div class="modal-test">
-    <ContextualTransition
-      v-for="s in slugs"
-      style="width: 160px; height: 160px; flex-basis: 160px;"
-      :key="s"
-      :duration="222"
-      :allow-motion="!forceReducedMotion"
-      :allow-overflow="true"
-    >
-      <NuxtLink 
-        v-if="s !== route.params.slug"
-        :to="`/modal/${s}`"
-        style="display: block;"
-      >
-        <FakeImage
-          :width="160"
-          :height="160"
-          :color="s"
-          class="block"
-          style="border: 4px solid transparent"
-          v-shared-element="{
-            id: s, role: 'img', teleportSelector: '[data-modal]'
-        }"/>
-      </NuxtLink>
-      <div v-else v-shared-element-teleport="'[data-modal]'">
-        <!-- <div style="width: 160px; height: 160px; background-color: #eee;" /> -->
-        <FakeImage
-          :width="160"
-          :height="160"
-          :color="s"
-          class="block"
-          style="border: 4px solid black"
-          />
-      </div>
-    </ContextualTransition>
-  </div>
   <div>
-    <Teleport to="body">
-      <!--
+    <h2>
+      <NuxtLink to="/modal">
+        Modal Example
+      </NuxtLink>
+    </h2>
+    <p>All child pages will appear here on the parent page</p>
+    <p v-if="route.params.slug">
+      Slug: {{ route.params.slug }}
+    </p>
+    <p v-else>
+      <em>No slug</em>
+    </p>
+    <div class="modal-test">
+      <ContextualTransition
+        v-for="s in slugs"
+        :key="s"
+        style="width: 160px; height: 160px; flex-basis: 160px;"
+        :duration="222"
+        :allow-motion="!forceReducedMotion"
+        :allow-overflow="true"
+      >
+        <NuxtLink 
+          v-if="s !== route.params.slug"
+          :to="`/modal/${s}`"
+          style="display: block;"
+        >
+          <FakeImage
+            v-shared-element="{
+              id: s, role: 'img', teleportSelector: '[data-modal]'
+            }"
+            :width="160"
+            :height="160"
+            :color="s"
+            class="block"
+            style="border: 4px solid transparent"
+          />
+        </NuxtLink>
+        <div
+          v-else
+          v-shared-element-teleport="'[data-modal]'"
+        >
+          <!-- <div style="width: 160px; height: 160px; background-color: #eee;" /> -->
+          <FakeImage
+            :width="160"
+            :height="160"
+            :color="s"
+            class="block"
+            style="border: 4px solid black"
+          />
+        </div>
+      </ContextualTransition>
+    </div>
+    <div>
+      <Teleport to="body">
+        <!--
         this outer transition keeps the teleported contents alive during the
         "main" transition above -- it's a bit of a hack. Otherwise, the
         teleported elements would be removed immediately and unavailable for
         animation.
       -->
-      <Transition name="contextual-transition">
-        <div
-          v-if="route.params.slug"
-          class="modal"
-          data-modal=""
-          style="--contextual-transition-duration: 222ms;"
-          @click="closeModal"
-        >
-          <!--
+        <Transition name="contextual-transition">
+          <div
+            v-if="route.params.slug"
+            class="modal"
+            data-modal=""
+            style="--contextual-transition-duration: 222ms;"
+            @click="closeModal"
+          >
+            <!--
             this inner transition is for the "Relative Slide Transition" as you
             navigate between "slides"
           -->
-          <ContextualTransition group="modalup" :duration="222">
-            <div :key="slug" v-relative-slide="{ value: slugIndex, type: 'modal' }">
-              <NuxtPage />
-            </div>
-          </ContextualTransition>
-        </div>
-      </Transition>
-    </Teleport>
+            <ContextualTransition
+              group="modalup"
+              :duration="222"
+            >
+              <div
+                :key="slug"
+                v-relative-slide="{ value: slugIndex, type: 'modal' }"
+              >
+                <NuxtPage />
+              </div>
+            </ContextualTransition>
+          </div>
+        </Transition>
+      </Teleport>
+    </div>
   </div>
-</div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed, ref } from "vue";
+import { computed, ref } from "vue";
 import { useRoute, useRouter, onBeforeRouteUpdate } from "vue-router";
 import FakeImage from "../components/FakeImage.vue";
 import { ContextualTransition } from "vue-contextual-transition";

@@ -1,5 +1,3 @@
-import { searchForWorkspaceRoot } from 'vite'
-
 export default defineNuxtConfig({
   modules: ['../src/module'],
   vite: {
