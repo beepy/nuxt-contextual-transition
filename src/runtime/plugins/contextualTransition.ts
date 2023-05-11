@@ -1,4 +1,4 @@
-import { defineNuxtPlugin } from '#app'
+import { defineNuxtPlugin, useRuntimeConfig } from '#app'
 import type { RouterConfig } from '@nuxt/schema';
 import {
   RouteLocationNormalized,
@@ -13,6 +13,9 @@ import "vue-contextual-transition/dist/style.css";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(install)
+
+  const runtimeConfig = useRuntimeConfig()
+  const hashScroll = runtimeConfig.public.contextualTransition.hashScroll;
 
   // scroll behavior
   nuxtApp.$router.options.scrollBehavior = (
@@ -31,16 +34,15 @@ export default defineNuxtPlugin((nuxtApp) => {
     ) {
       setCallbacks = false;
     }
+    let result = savedPosition ?? (
+      (to.hash && hashScroll !== false) ? { el: to.hash, behavior: hashScroll } : { left: 0, top: 0 }
+      );
     if (setCallbacks) {
       return new Promise((resolve, reject) => {
-        const position = savedPosition ?? { left: 0, top: 0 };
-        resolve(position);
+        resolve(result)
       });
     } else {
-      const result = savedPosition ?? { left: 0, top: 0 };
-
       return result;
     }
   }
-
 });

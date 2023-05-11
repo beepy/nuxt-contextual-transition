@@ -7,7 +7,9 @@
 
       <FakeImage v-shared-element="{ id: post.slug, role: 'img'}" :width="1600" :height="900" :color="post.color" />
       <p>Post content</p>
+      <NuxtLink to="#test">On-page link test</NuxtLink>
       <div v-html="post.content" />
+      <h2 id="test">Test on-page link target</h2>
     </div>
     <div v-else>
       <p>Not found</p>

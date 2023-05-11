@@ -1,18 +1,30 @@
 import { defineNuxtModule, addPlugin, addImports, createResolver } from '@nuxt/kit'
 
+import {
+  RouteLocationNormalized,
+  RouteLocationNormalizedLoaded,
+} from 'vue-router';
+
 // Module options TypeScript interface definition
-export interface ModuleOptions {}
+export interface ModuleOptions {
+  hashScroll: false | 'smooth' | 'instant' | 'auto';
+}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'contextual-transition',
-    configKey: 'contextualTransition'
+    configKey: 'contextualTransition',
+    compatibility: {
+      nuxt: '^3.0.0'
+    }
   },
   // Default configuration options of the Nuxt module
-  defaults: {},
+  defaults: { hashScroll: 'smooth' },
   setup (options, nuxt) {
     const resolver = createResolver(import.meta.url)
 
+    nuxt.options.runtimeConfig.public.contextualTransition = { ...options }
+    
     addPlugin(resolver.resolve('./runtime/plugins/contextualTransition'))
     addImports([
       {
